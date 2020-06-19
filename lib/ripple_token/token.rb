@@ -34,7 +34,7 @@ module RippleToken
     attr_reader :public_key
 
     def expired?(token)
-      expiration = Time.at(token['exp'])
+      expiration = Time.at(token['exp'].to_i)
       expiration < Time.now
     end
   end
