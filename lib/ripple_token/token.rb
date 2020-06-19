@@ -10,7 +10,7 @@ module RippleToken
       raise MissingTokenError if token.nil? || token&.empty?
 
       begin
-        decoded_token = JWT.decode(token, public_key, true, { algorithm: 'RS256' })
+        decoded_token = JWT.decode(token, public_key, true, { algorithm: 'RS256' })[0]
         raise ExpiredTokenError if expired? decoded_token
 
         decoded_token
@@ -34,7 +34,7 @@ module RippleToken
     attr_reader :public_key
 
     def expired?(token)
-      expiration = Time.at(token['exp'].to_i)
+      expiration = Time.at(token['exp'])
       expiration < Time.now
     end
   end
