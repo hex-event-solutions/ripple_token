@@ -34,6 +34,7 @@ module RippleToken
       env['keycloak.user_last_name'] = decoded_token['family_name']
       env['keycloak.user_phone'] = decoded_token['phone']
       env['keycloak.user_email_verified'] = decoded_token['email_verified']
+      env['keycloak.user_groups'] = decoded_token['groups']
     end
 
     def token
