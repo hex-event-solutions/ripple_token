@@ -36,7 +36,7 @@ module RippleToken
         response = get("#{base_url}/auth/realms/#{realm}")
         raw_public_key = "-----BEGIN PUBLIC KEY-----\n" \
                       "#{response['public_key']}\n" \
-                      "-----END PUBLIC KEY-----"
+                      '-----END PUBLIC KEY-----'
         @public_key = OpenSSL::PKey::RSA.new raw_public_key
         @last_update_at = Time.now
       end
