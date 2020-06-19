@@ -34,7 +34,9 @@ module RippleToken
 
       def fetch_public_key
         response = get("#{base_url}/auth/realms/#{realm}")
-        @public_key = response['public_key']
+        @public_key = "-----BEGIN PUBLIC KEY-----\n" \
+                      "#{response['public_key']}\n" \
+                      "-----END PUBLIC KEY-----"
         @last_update_at = Time.now
       end
     end

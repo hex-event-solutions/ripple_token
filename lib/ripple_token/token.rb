@@ -16,6 +16,8 @@ module RippleToken
         decoded_token
       rescue JWT::DecodeError => e
         raise TokenDecodeError, e.message
+      rescue JWT::ExpiredSignature => e
+        raise ExpiredTokenError, e.message
       end
     end
 
