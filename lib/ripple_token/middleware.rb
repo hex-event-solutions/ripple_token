@@ -19,7 +19,7 @@ module RippleToken
       else
         encoded_token = env['HTTP_AUTHORIZATION']&.gsub(/^Bearer /, '') || ''
         decoded_token = token.decode(encoded_token)
-        store_user_details(, env)
+        store_user_details(decoded_token, env)
       end
     end
 
