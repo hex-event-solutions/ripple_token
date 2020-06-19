@@ -10,7 +10,7 @@ module RippleToken
       raise MissingTokenError if token.nil? || token&.empty?
 
       begin
-        decoded_token = JWT.decode(token, public_key, true, { algorithm: 'HS256' })
+        decoded_token = JWT.decode(token, public_key, true, { algorithm: 'RS256' })
         raise ExpiredTokenError if expired? decoded_token
 
         decoded_token
