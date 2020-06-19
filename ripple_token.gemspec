@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Hex Event Solutions Limited']
   spec.email         = ['ruby@hexes.co.uk']
 
-  spec.summary       = "Keycloak token validator"
+  spec.summary       = 'Keycloak token validator'
   spec.homepage      = 'https://rubygems.org/gems/ripple_token'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
