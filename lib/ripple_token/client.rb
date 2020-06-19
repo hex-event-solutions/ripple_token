@@ -30,7 +30,7 @@ module RippleToken
 
       delegate :base_url, :realm, :public_key_ttl, to: :configuration
 
-      attr_accessor :last_update_at
+      attr_accessor :last_update_at, :configuration
 
       def fetch_public_key
         response = get("#{base_url}/auth/realms/#{realm}")
