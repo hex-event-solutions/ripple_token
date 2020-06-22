@@ -16,7 +16,7 @@ module RippleToken
 
       encoded_token = env['HTTP_AUTHORIZATION']&.gsub(/^Bearer /, '') || ''
       unless token.public_path? method, path
-        raise MissingTokenError if encoded_token.nil || encoded_token&.empty?
+        raise MissingTokenError if encoded_token.nil? || encoded_token&.empty?
       end
       decoded_token = token.decode(encoded_token)
 
