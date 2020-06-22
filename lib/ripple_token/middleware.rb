@@ -14,11 +14,14 @@ module RippleToken
       method = env['REQUEST_METHOD']
       path = env['PATH_INFO']
 
+      encoded_token = env['HTTP_AUTHORIZATION']&.gsub(/^Bearer /, '') || ''
       unless token.public_path? method, path
-        encoded_token = env['HTTP_AUTHORIZATION']&.gsub(/^Bearer /, '') || ''
-        decoded_token = token.decode(encoded_token)
-        store_user_details(decoded_token, env)
+        raise MissingTokenError if encoded_token.nil || encoded_token&.empty?
       end
+      decoded_token = token.decode(encoded_token)
+
+      store_user_details(decoded_token, env)
+
       @app.call(env)
     end
 
