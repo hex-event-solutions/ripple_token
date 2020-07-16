@@ -24,7 +24,6 @@ module RippleToken
         store_user_details(decoded_token, env)
       end
 
-
       @app.call(env)
     end
 
