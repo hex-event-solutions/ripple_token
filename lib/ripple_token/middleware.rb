@@ -19,9 +19,7 @@ module RippleToken
       if encoded_token.nil? || encoded_token&.empty?
         raise MissingTokenError unless token.public_path? method, path
       else
-        decoded_token = token.decode(encoded_token)
-
-        store_user_details(decoded_token, env)
+        store_user_details(encoded_token, env)
       end
 
       @app.call(env)
@@ -29,7 +27,10 @@ module RippleToken
 
     private
 
-    def store_user_details(decoded_token, env)
+    def store_user_details(encoded_token, env)
+      env['keycloak.raw_token'] = encoded_token
+      decoded_token = token.decode(encoded_token)
+
       env['keycloak.token'] = decoded_token
       env['keycloak.user_id'] = decoded_token['sub']
       env['keycloak.user_roles'] = decoded_token['realm_access']['roles']
