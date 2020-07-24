@@ -22,7 +22,7 @@ module RippleToken
     def public_path?(method, path)
       return false if Client.public_paths.nil? || Client.public_paths.empty?
 
-      return true if Client.public_paths[method]&.include? path
+      return true if Client.public_paths[method]&.select { |p| path[p] }&.any?
 
       false
     end
