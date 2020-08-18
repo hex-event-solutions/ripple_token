@@ -11,7 +11,7 @@ module RippleToken
     include HTTParty
 
     class << self
-      delegate :public_paths, to: :configuration
+      delegate :public_paths, :logger, to: :configuration
 
       def configure
         @configuration = Configuration.new

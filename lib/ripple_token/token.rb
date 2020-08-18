@@ -7,16 +7,14 @@ module RippleToken
     end
 
     def decode(token)
-      begin
-        decoded_token = JWT.decode(token, public_key, true, { algorithm: 'RS256' })[0]
-        raise ExpiredTokenError if expired? decoded_token
+      decoded_token = JWT.decode(token, public_key, true, { algorithm: 'RS256' })[0]
+      raise ExpiredTokenError if expired? decoded_token
 
-        decoded_token
-      rescue JWT::DecodeError => e
-        raise TokenDecodeError, e.message
-      rescue JWT::ExpiredSignature => e
-        raise ExpiredTokenError, e.message
-      end
+      decoded_token
+    rescue JWT::DecodeError => e
+      raise TokenDecodeError, e.message
+    rescue JWT::ExpiredSignature => e
+      raise ExpiredTokenError, e.message
     end
 
     def public_path?(method, path)

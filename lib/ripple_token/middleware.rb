@@ -16,7 +16,10 @@ module RippleToken
 
       encoded_token = env['HTTP_AUTHORIZATION']&.gsub(/^Bearer /, '') || ''
 
+      Client.logger.debug("Received #{encoded_token} token")
+
       if encoded_token.nil? || encoded_token&.empty?
+        Client.logger.info('No token provided in request')
         raise MissingTokenError unless token.public_path? method, path
       else
         store_user_details(encoded_token, env)

@@ -5,6 +5,7 @@ module RippleToken
     attr_accessor :base_url,
                   :realm,
                   :public_key_ttl,
-                  :public_paths
+                  :public_paths,
+                  :logger
   end
 end
